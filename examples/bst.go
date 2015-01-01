@@ -15,7 +15,7 @@ func main() {
 	tree.Insert(30, "thirty")
 	tree.Insert(5, "five")
 	tree.Insert(15, "fiveteen")
-	fmt.Printf("%+v\n", tree) // (10 (5 () ()) (20 (15 () ()) (30 () ())))
+	fmt.Println(tree) // (10 (5 () ()) (20 (15 () ()) (30 () ())))
 
 	// Search
 	var t *bst.Tree
