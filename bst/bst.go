@@ -45,6 +45,51 @@ func (t *Tree) Search(key int) *Tree {
 	}
 }
 
+func (t *Tree) leftmostLeaf() *Tree {
+	for {
+		if t.Left.Key == nil {
+			break
+		}
+		return t.Left.leftmostLeaf()
+	}
+	return t
+}
+
+func (t *Tree) Delete(key int) {
+	if t.Key == nil {
+		return
+	}
+	if key == *t.Key {
+		// Leaf
+		if t.Left.Key == nil && t.Right.Key == nil {
+			t.Key = nil
+		}
+		// Single Child
+		if t.Left.Key != nil && t.Right.Key == nil {
+			t.Key = t.Left.Key
+			t.Value = t.Left.Value
+			t.Left = New()
+		}
+		if t.Left.Key == nil && t.Right.Key != nil {
+			t.Key = t.Right.Key
+			t.Value = t.Right.Value
+			t.Right = New()
+		}
+		// Two Children
+		if t.Left.Key != nil && t.Right.Key != nil {
+			successor := t.Right.leftmostLeaf()
+			t.Key = successor.Key
+			successor.Delete(*successor.Key)
+		}
+	} else {
+		if key < *t.Key {
+			t.Left.Delete(key)
+		} else {
+			t.Right.Delete(key)
+		}
+	}
+}
+
 func (t *Tree) String() string {
 	if t.Key != nil {
 		return fmt.Sprintf("(%d %s %s)", *t.Key, t.Left, t.Right)

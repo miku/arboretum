@@ -24,4 +24,23 @@ func main() {
 
 	t = tree.Search(20)
 	fmt.Println(t.Value) // twenty
+
+	// Delete
+	tree.Delete(15)
+	fmt.Println(tree) // (10 (5 () ()) (20 () (30 () ())))
+
+	tree.Delete(10)
+	fmt.Println(tree) // (20 (5 () ()) (30 () ()))
+
+	tree.Delete(7)
+	fmt.Println(tree) // (20 (5 () ()) (30 () ()))
+
+	tree.Delete(30)
+	fmt.Println(tree) // (20 (5 () ()) ())
+
+	tree.Delete(5)
+	fmt.Println(tree) // (20 () ())
+
+	tree.Delete(20)
+	fmt.Println(tree) // ()
 }
